@@ -2,48 +2,80 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 1.5rem 1rem 3rem;
+  padding: 1.25rem 0.75rem 2rem;
+}
+
+@media (min-width: 640px) {
+  .feedback-form-container {
+    padding: 1.5rem 1rem 3rem;
+  }
 }
 
 .feedback-form-card {
   background: white;
   border-radius: 20px;
-  padding: 2.5rem;
+  padding: 1.5rem;
   max-width: 620px;
   width: 100%;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0,0,0,0.04);
   border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
+@media (min-width: 640px) {
+  .feedback-form-card {
+    padding: 2.5rem;
+  }
+}
+
 .feedback-form-card h2 {
   color: #0f172a;
   margin-bottom: 0.5rem;
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
 }
 
+@media (min-width: 640px) {
+  .feedback-form-card h2 {
+    font-size: 1.6rem;
+  }
+}
+
 .subtitle {
   color: #64748b;
-  margin-bottom: 2rem;
-  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
   line-height: 1.6;
+}
+
+@media (min-width: 640px) {
+  .subtitle {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+  }
 }
 
 .success-message {
   background: linear-gradient(135deg, #ecfdf5, #d1fae5);
   border: 1px solid #6ee7b7;
   color: #065f46;
-  padding: 1rem 1.25rem;
+  padding: 0.875rem 1rem;
   border-radius: 12px;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
   animation: slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
+}
+
+@media (min-width: 640px) {
+  .success-message {
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+  }
 }
 
 .success-icon {
@@ -64,14 +96,21 @@
   background: linear-gradient(135deg, #fef2f2, #fee2e2);
   border: 1px solid #fca5a5;
   color: #991b1b;
-  padding: 1rem 1.25rem;
+  padding: 0.875rem 1rem;
   border-radius: 12px;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
   animation: slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+}
+
+@media (min-width: 640px) {
+  .error-message {
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+  }
 }
 
 .error-icon {
@@ -104,7 +143,13 @@
 form {
   display: flex;
   flex-direction: column;
-  gap: 1.375rem;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  form {
+    gap: 1.375rem;
+  }
 }
 
 .form-group {
@@ -116,8 +161,14 @@ form {
   font-weight: 600;
   color: #374151;
   margin-bottom: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   letter-spacing: 0.01em;
+}
+
+@media (min-width: 640px) {
+  .form-group label {
+    font-size: 0.875rem;
+  }
 }
 
 .form-group input[type="text"],
@@ -127,11 +178,20 @@ form {
   padding: 0.75rem 0.875rem;
   border: 1.5px solid #e2e8f0;
   border-radius: 10px;
-  font-size: 0.9rem;
+  font-size: 16px; /* Prevents iOS zoom on focus */
   transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
   font-family: 'Inter', system-ui, sans-serif;
   background-color: #f8fafc;
   color: #0f172a;
+}
+
+@media (min-width: 640px) {
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group select,
+  .form-group textarea {
+    font-size: 0.9rem;
+  }
 }
 
 .form-group input[type="text"]:focus,
@@ -162,28 +222,26 @@ form {
 
 .form-group textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 100px;
   line-height: 1.6;
+}
+
+@media (min-width: 640px) {
+  .form-group textarea {
+    min-height: 120px;
+  }
 }
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.375rem;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
 }
 
-@media (max-width: 600px) {
+@media (min-width: 500px) {
   .form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .feedback-form-card {
-    padding: 1.5rem;
-    border-radius: 16px;
-  }
-
-  .feedback-form-card h2 {
-    font-size: 1.4rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.375rem;
   }
 }
 
@@ -197,8 +255,15 @@ form {
 
 .stars {
   display: flex;
-  gap: 0.5rem;
-  font-size: 2rem;
+  gap: 0.375rem;
+  font-size: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .stars {
+    gap: 0.5rem;
+    font-size: 2rem;
+  }
 }
 
 .star {
@@ -206,6 +271,8 @@ form {
   color: #e2e8f0;
   transition: color 0.15s, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   user-select: none;
+  /* Ensure generous touch target */
+  padding: 0.15rem;
 }
 
 .star:hover,
@@ -216,12 +283,12 @@ form {
 }
 
 .submit-btn {
-  padding: 0.9rem 1.5rem;
+  padding: 0.875rem 1.5rem;
   background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
   color: white;
   border: none;
   border-radius: 12px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s, opacity 0.2s;
@@ -229,6 +296,14 @@ form {
   font-family: 'Inter', system-ui, sans-serif;
   letter-spacing: 0.01em;
   box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .submit-btn {
+    padding: 0.9rem 1.5rem;
+    font-size: 0.95rem;
+  }
 }
 
 .submit-btn:hover:not(:disabled) {

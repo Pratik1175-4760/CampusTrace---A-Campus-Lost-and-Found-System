@@ -35,20 +35,20 @@ export default function AdminTransactionsPage() {
   useEffect(() => { load() }, [load])
 
   return (
-    <div className="p-6 fade-in">
-      <div className="mb-6 flex items-center justify-between flex-wrap gap-3">
+    <div className="p-4 sm:p-6 fade-in">
+      <div className="mb-4 sm:mb-6 flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800">Transaction Log</h1>
-          <p className="text-sm text-slate-500 mt-0.5">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-800">Transaction Log</h1>
+          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
             Full audit trail — {total} events recorded
           </p>
         </div>
         <button
           onClick={() => load()}
-          className="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded-xl text-sm text-slate-600 hover:border-blue-400 hover:text-blue-900 transition-colors"
+          className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-slate-300 rounded-xl text-sm text-slate-600 hover:border-blue-400 hover:text-blue-900 transition-colors"
         >
           <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-          Refresh
+          <span className="hidden sm:inline">Refresh</span>
         </button>
       </div>
 
@@ -56,7 +56,7 @@ export default function AdminTransactionsPage() {
         {loading && Array.from({ length: 8 }).map((_, i) => <RowSkeleton key={i} />)}
 
         {!loading && logs.length === 0 && (
-          <div className="bg-white rounded-2xl border border-slate-200 py-16 text-center">
+          <div className="bg-white rounded-2xl border border-slate-200 py-12 sm:py-16 text-center">
             <ClipboardList className="w-10 h-10 text-slate-300 mx-auto mb-3" />
             <p className="text-slate-500 text-sm">No transactions recorded yet</p>
           </div>
@@ -68,17 +68,17 @@ export default function AdminTransactionsPage() {
           const item = log.itemId
 
           return (
-            <div key={log._id} className="bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-sm transition-shadow">
-              <div className="flex items-start gap-4">
+            <div key={log._id} className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 hover:shadow-sm transition-shadow">
+              <div className="flex items-start gap-3 sm:gap-4">
 
                 {/* Action icon */}
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${cfg.color}`}>
+                <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${cfg.color}`}>
                   <Icon className="w-4 h-4" />
                 </div>
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <div className="flex items-start justify-between gap-2 flex-wrap">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="font-semibold text-slate-800 text-sm">{cfg.label}</span>
                       {log.fromStatus && log.toStatus && (
@@ -89,7 +89,7 @@ export default function AdminTransactionsPage() {
                         </span>
                       )}
                     </div>
-                    <span className="text-xs text-slate-400 flex-shrink-0">{formatDate(log.createdAt)}</span>
+                    <span className="text-[10px] sm:text-xs text-slate-400 flex-shrink-0">{formatDate(log.createdAt)}</span>
                   </div>
 
                   {/* Performed by */}
@@ -99,11 +99,11 @@ export default function AdminTransactionsPage() {
 
                   {/* Item reference */}
                   {item && (
-                    <div className="mt-3 flex items-center gap-3 bg-slate-50 rounded-xl p-3 border border-slate-100">
+                    <div className="mt-2.5 sm:mt-3 flex items-center gap-3 bg-slate-50 rounded-xl p-2.5 sm:p-3 border border-slate-100">
                       <img
                         src={item.imageUrl}
                         alt={item.category}
-                        className="w-10 h-10 rounded-lg object-cover border border-slate-200 flex-shrink-0"
+                        className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg object-cover border border-slate-200 flex-shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-medium text-slate-700">{item.category}</div>
@@ -117,7 +117,7 @@ export default function AdminTransactionsPage() {
 
                   {/* Details */}
                   {log.action === 'ITEM_COLLECTED' && log.details && (
-                    <div className="mt-3 bg-green-50 rounded-xl p-3 border border-green-100 text-xs text-slate-600 grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <div className="mt-2.5 sm:mt-3 bg-green-50 rounded-xl p-2.5 sm:p-3 border border-green-100 text-xs text-slate-600 grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {[
                         ['Collector', log.details.name],
                         ['Roll No.',  log.details.rollNumber],
@@ -134,7 +134,7 @@ export default function AdminTransactionsPage() {
                   )}
 
                   {log.action === 'ITEM_REPORTED' && log.details && (
-                    <div className="mt-3 bg-amber-50 rounded-xl p-3 border border-amber-100 text-xs text-slate-600 grid grid-cols-2 gap-2">
+                    <div className="mt-2.5 sm:mt-3 bg-amber-50 rounded-xl p-2.5 sm:p-3 border border-amber-100 text-xs text-slate-600 grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <div>
                         <span className="text-slate-400">Submission: </span>
                         <span className="font-medium">{log.details.submissionType?.replace('_', ' ')}</span>
@@ -158,19 +158,19 @@ export default function AdminTransactionsPage() {
 
       {/* Pagination */}
       {pages > 1 && (
-        <div className="flex justify-center gap-2 mt-6">
+        <div className="flex justify-center gap-2 mt-6 flex-wrap">
           <button
             onClick={() => setPage(p => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="px-4 py-2 border border-slate-300 rounded-lg text-sm text-slate-600 disabled:opacity-40 hover:border-blue-400 transition-colors"
+            className="px-3 sm:px-4 py-2 border border-slate-300 rounded-lg text-sm text-slate-600 disabled:opacity-40 hover:border-blue-400 transition-colors"
           >
             Previous
           </button>
-          <span className="px-4 py-2 text-sm text-slate-600">Page {page} of {pages}</span>
+          <span className="px-3 sm:px-4 py-2 text-sm text-slate-600">Page {page} of {pages}</span>
           <button
             onClick={() => setPage(p => Math.min(pages, p + 1))}
             disabled={page === pages}
-            className="px-4 py-2 border border-slate-300 rounded-lg text-sm text-slate-600 disabled:opacity-40 hover:border-blue-400 transition-colors"
+            className="px-3 sm:px-4 py-2 border border-slate-300 rounded-lg text-sm text-slate-600 disabled:opacity-40 hover:border-blue-400 transition-colors"
           >
             Next
           </button>

@@ -7,16 +7,16 @@ import { formatDate, formatLocationLabel } from '../../utils/helpers.js'
 import { SUBMISSION_LABELS } from '../../utils/constants.js'
 
 const InfoRow = ({ icon: Icon, label, value, iconColor = '#2563eb' }) => (
-  <div className="flex items-start gap-3 py-3 border-b border-slate-100 last:border-0">
+  <div className="flex items-start gap-3 py-2.5 sm:py-3 border-b border-slate-100 last:border-0">
     <div
-      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+      className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
       style={{ background: `${iconColor}18` }}
     >
-      <Icon className="w-4 h-4" style={{ color: iconColor }} />
+      <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" style={{ color: iconColor }} />
     </div>
     <div className="flex-1 min-w-0">
-      <div className="text-xs text-slate-400 font-medium uppercase tracking-wider mb-0.5">{label}</div>
-      <div className="text-sm text-slate-800 font-semibold">{value}</div>
+      <div className="text-[10px] sm:text-xs text-slate-400 font-medium uppercase tracking-wider mb-0.5">{label}</div>
+      <div className="text-xs sm:text-sm text-slate-800 font-semibold">{value}</div>
     </div>
   </div>
 )
@@ -30,7 +30,7 @@ export default function ItemDetailModal({ item, onClose, onCollected }) {
 
   return (
     <Modal isOpen={!!item} onClose={onClose} title="Found Item Details" size="lg">
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
 
         {/* Image */}
         <div
@@ -49,7 +49,7 @@ export default function ItemDetailModal({ item, onClose, onCollected }) {
           <div className="flex items-center gap-2 flex-wrap">
             <StatusBadge status={item.status} size="md" />
             <span
-              className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full"
               style={{
                 background: 'linear-gradient(135deg, #f1f5f9, #e2e8f0)',
                 color: '#475569',
@@ -60,7 +60,7 @@ export default function ItemDetailModal({ item, onClose, onCollected }) {
               {SUBMISSION_LABELS[item.submissionType]}
             </span>
           </div>
-          <span className="text-xs text-slate-400 font-medium">{formatDate(item.createdAt)}</span>
+          <span className="text-[10px] sm:text-xs text-slate-400 font-medium">{formatDate(item.createdAt)}</span>
         </div>
 
         {/* Info rows */}
@@ -75,32 +75,32 @@ export default function ItemDetailModal({ item, onClose, onCollected }) {
 
         {/* Description */}
         {item.description && (
-          <div className="bg-slate-50 rounded-xl p-4" style={{ border: '1px solid #e2e8f0' }}>
-            <div className="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Description</div>
-            <p className="text-slate-700 text-sm leading-relaxed">{item.description}</p>
+          <div className="bg-slate-50 rounded-xl p-3.5 sm:p-4" style={{ border: '1px solid #e2e8f0' }}>
+            <div className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1.5 sm:mb-2">Description</div>
+            <p className="text-slate-700 text-xs sm:text-sm leading-relaxed">{item.description}</p>
           </div>
         )}
 
         {/* AI description */}
         {item.aiDescription && item.aiDescription !== item.description && (
           <div
-            className="rounded-xl p-4 space-y-2"
+            className="rounded-xl p-3.5 sm:p-4 space-y-2"
             style={{
               background: 'linear-gradient(135deg, #eff6ff, #eef2ff)',
               border: '1px solid #c7d2fe',
             }}
           >
-            <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-700 uppercase tracking-wider">
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-indigo-700 uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5" />
               AI Analysis
             </div>
-            <p className="text-slate-700 text-sm leading-relaxed">{item.aiDescription}</p>
+            <p className="text-slate-700 text-xs sm:text-sm leading-relaxed">{item.aiDescription}</p>
             {item.aiTags?.length > 0 && (
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {item.aiTags.map((tag, i) => (
                   <span
                     key={i}
-                    className="text-xs font-medium px-2 py-0.5 rounded-full"
+                    className="text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-full"
                     style={{ background: '#c7d2fe', color: '#3730a3' }}
                   >
                     {tag}
@@ -114,13 +114,13 @@ export default function ItemDetailModal({ item, onClose, onCollected }) {
         {/* Finder contact */}
         {item.submissionType === 'with_finder' && item.finderContact && (
           <div
-            className="rounded-xl p-4"
+            className="rounded-xl p-3.5 sm:p-4"
             style={{
               background: 'linear-gradient(135deg, #fffbeb, #fef3c7)',
               border: '1px solid #fcd34d',
             }}
           >
-            <div className="text-xs font-bold text-amber-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+            <div className="text-[10px] sm:text-xs font-bold text-amber-700 uppercase tracking-wider mb-2 sm:mb-3 flex items-center gap-1.5">
               <User className="w-3.5 h-3.5" />
               Contact Finder
             </div>
@@ -138,7 +138,7 @@ export default function ItemDetailModal({ item, onClose, onCollected }) {
                 {item.finderContact.value}
               </a>
             </div>
-            <p className="text-xs text-amber-700/80 mt-2.5 leading-relaxed">
+            <p className="text-xs text-amber-700/80 mt-2 sm:mt-2.5 leading-relaxed">
               This item is still with the finder — contact them directly to retrieve it.
             </p>
           </div>
@@ -147,7 +147,7 @@ export default function ItemDetailModal({ item, onClose, onCollected }) {
         {/* Collected info */}
         {item.status === 'collected' && item.collectorInfo && (
           <div
-            className="rounded-xl p-4"
+            className="rounded-xl p-3.5 sm:p-4"
             style={{
               background: 'linear-gradient(135deg, #ecfdf5, #d1fae5)',
               border: '1px solid #6ee7b7',
@@ -168,7 +168,7 @@ export default function ItemDetailModal({ item, onClose, onCollected }) {
           <button
             id="collect-item-btn"
             onClick={() => setShowCollectForm(true)}
-            className="w-full py-3.5 font-bold text-sm rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
+            className="w-full py-3 sm:py-3.5 font-bold text-xs sm:text-sm rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
             style={{
               background: 'linear-gradient(135deg, #065f46 0%, #10b981 100%)',
               color: 'white',
