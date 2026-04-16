@@ -1,11 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { X } from 'lucide-react'
 
 export default function Modal({ isOpen, onClose, title, children, size = 'md' }) {
+  const backdropRef = useRef(null)
+
   useEffect(() => {
-    if (isOpen) document.body.style.overflow = 'hidden'
-    else        document.body.style.overflow = ''
-    return () => { document.body.style.overflow = '' }
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+      // Focus trap - prevent background scrolling
+      document.body.style.position = 'fixed'
+      document.body.style.width = '100%'
+    } else {
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+    }
   }, [isOpen])
 
   if (!isOpen) return null
@@ -17,15 +31,25 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' })
     xl:  'max-w-4xl',
   }
 
+  const handleBackdropClick = (e) => {
+    // Only close if clicking on the backdrop itself, not the modal content
+    if (backdropRef.current && e.target === backdropRef.current) {
+      onClose()
+    }
+  }
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 modal-backdrop"
-      onClick={(e) => e.target === e.currentTarget && onClose()}
+      ref={backdropRef}
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 modal-backdrop"
+      onClick={handleBackdropClick}
     >
       <div
         className={`bg-white w-full ${sizes[size]} flex flex-col scale-in
           rounded-t-3xl sm:rounded-2xl
-          max-h-[92vh] sm:max-h-[90vh]`}
+          max-h-[92vh] sm:max-h-[90vh]
+          mx-auto`}
+        onClick={(e) => e.stopPropagation()}
         style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.22), 0 8px 20px rgba(0,0,0,0.1)' }}
       >
         {/* Mobile drag handle */}
